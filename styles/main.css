@@ -1,0 +1,558 @@
+:root{
+  --accent:#2e2e2e;        /* anthracite */
+  --muted:#f3f4f6;         /* gris clair */
+  --anthracite:#222222;
+  --text:#2b2b2b;
+  --container:1100px;
+  --radius:10px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  color:var(--anthracite);
+  background:var(--muted);
+}
+
+/* conteneur central */
+.container{max-width:var(--container);margin:0 auto;padding:4px}
+
+/* header */
+.site-header{background:transparent;border-bottom:1px solid rgba(0,0,0,0.06)}
+.header-inner{
+  display:flex;
+  flex-direction:column;    /* par défaut (contact.html reste colonne) */
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  padding:8px 0;
+}
+
+/* spécifique index: brand à gauche, nav à droite */
+.index-header .header-inner{
+  display:grid;
+  grid-template-columns: auto 1fr auto; /* menu / logo-centre (via centre de la 2ème colonne) / nav */
+  align-items:center;
+  gap:4px;
+  position:relative;
+  padding:4px 26px;
+  min-height:120px;
+}
+
+/* placer le logo au centre de la zone centrale */
+.index-header .brand{
+  grid-column:2; /* centre */
+  justify-self:center;
+  align-self:center;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+}
+.site-logo{
+  height:250px; /* <-- augmentez cette valeur pour agrandir le logo (ex : 320px) */
+  max-width: 100%;
+  width:auto;
+  display:block;
+}
+.brand-text{font-weight:600;font-size:1.6rem}
+@media (max-width:720px){ .site-logo{height:48px} .brand-text{font-size:1.2rem} }
+/* navigation */
+.main-nav{display:flex;gap:12px;align-items:center}
+.main-nav a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:6px}
+.main-nav a.active{font-weight:700;color:#fff;background:var(--accent)}
+
+/* effet de surbrillance pour les boutons de navigation */
+.main-nav a{
+  transition: background-color .18s ease, color .18s ease, transform .12s ease, box-shadow .18s ease;
+  will-change: transform, background-color;
+}
+
+.main-nav a:hover,
+.main-nav a:focus{
+  background: rgba(255,255,255,0.12); /* légère surbrillance */
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  outline: none;
+}
+
+.main-nav a:focus-visible{
+  box-shadow: 0 0 0 4px rgba(46,46,46,0.12);
+  border-radius: 6px;
+}
+
+/* conserver l'apparence du lien actif tout en ajoutant un léger effet */
+.main-nav a.active:hover{
+  filter: brightness(0.98);
+  transform: translateY(-2px);
+}
+
+/* bouton menu hamburger (caché desktop) */
+.menu-toggle{
+  display:none;
+  background:transparent;
+  border:0;
+  padding:6px;
+  cursor:pointer;
+}
+.menu-toggle .hamburger{
+  width:22px;
+  height:2px;
+  background:var(--anthracite);
+  position:relative;
+  display:inline-block;
+}
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after{
+  content:'';
+  position:absolute;
+  left:0;
+  width:22px;
+  height:2px;
+  background:var(--anthracite);
+}
+.menu-toggle .hamburger::before{top:-7px}
+.menu-toggle .hamburger::after{top:7px}
+
+/* hero */
+.hero{
+  height:320px;
+  background-image: url('../images/bg-hero.jpg');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  color:#fff;
+}
+.hero-overlay{width:100%;background:linear-gradient(to right, rgba(34,34,34,0.65), rgba(34,34,34,0.35));padding:40px 0;text-align:center}
+.hero h2{margin:0 0 8px;font-size:2.4rem;line-height:1.05;color:#fff}
+.cta{display:inline-block;margin-top:12px;padding:10px 16px;background:var(--accent);color:#fff;border-radius:6px;text-decoration:none}
+
+/* Hero : texte calibré et responsive */
+.hero-title{
+  font-size:2rem;          /* taille titre calibrée */
+  line-height:1.05;
+  margin:0 auto 10px;
+  max-width:980px;
+  text-align:center;
+  color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,0.45);
+}
+
+.hero-lead{
+  font-size:1rem;
+  line-height:1.45;
+  margin:0 auto 18px;
+  max-width:920px;
+  color:rgba(255,255,255,0.95);
+  text-align:center;
+}
+
+/* colonnes d'informations dans le hero */
+.hero-columns{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  align-items:flex-start;
+  margin-top:6px;
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+  padding:0 10px;
+}
+
+.hero-block{
+  background:rgba(255,255,255,0.06);
+  border-radius:10px;
+  padding:14px;
+  min-width:260px;
+  max-width:520px;
+  color:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18);
+}
+
+.hero-block h3{
+  margin:0 0 8px;
+  font-size:1rem;
+}
+
+.hero-block ul{
+  margin:0;
+  padding-left:18px;
+  font-size:0.95rem;
+  line-height:1.4;
+}
+
+/* services grid */
+.section-title{text-align:center;margin:28px 0 12px;color:var(--anthracite)}
+.services-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  align-items:flex-start;
+}
+.service-card{
+  background:#fff;
+  border-radius:10px;
+  width:100%;
+  max-width:320px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+  transition:transform .18s ease, box-shadow .18s ease;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+}
+.service-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 14px 34px rgba(0,0,0,0.12);
+}
+.service-img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+  transition:transform .25s ease;
+}
+.service-card:hover .service-img{
+  transform:scale(1.06);
+}
+
+/* contact page layout */
+.contact-page .contact-cards{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+.card{background:#fff;border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,0.06);padding:18px;width:320px}
+.card form label{display:block;font-size:0.9rem;margin-bottom:8px;color:var(--anthracite)}
+.card input, .card textarea{width:100%;padding:8px;margin-top:6px;border:1px solid #e6e6e6;border-radius:6px;background:#fbfbfb}
+.card button{margin-top:10px;padding:10px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer}
+
+/* footer */
+.site-footer{background:transparent;border-top:1px solid rgba(0,0,0,0.06);padding:18px 0;text-align:center;margin-top:30px;color:#666}
+
+/* bandeau devis : espacement vertical ajusté */
+.devis-banner{
+  display:flex;
+  justify-content:center;
+  margin-top:40px;   /* augmenter pour descendre le texte */
+  margin-bottom:12px;
+  padding:0 12px;
+}
+.devis-banner__inner{
+  background:var(--accent);
+  color:#fff;
+  padding:14px 20px;
+  border-radius:8px;
+  text-align:center;
+  max-width:920px;
+  width:100%;
+}
+
+/* lien dans le bandeau */
+.devis-banner__inner .devis-link{
+  margin-left:12px;
+  color:#fff;
+  text-decoration:underline;
+}
+
+/* ajustement responsive */
+@media (max-width:720px){
+  /* taille de base raisonnable */
+  html, body { font-size:15px; -webkit-text-size-adjust:100%; }
+
+  /* header compact et logo centré sans écraser la nav */
+  .index-header .header-inner{
+    padding:8px 12px;
+    gap:8px;
+    min-height:92px;
+    align-items:center;
+  }
+  .site-logo{
+    height:100px;    /* logo modéré sur mobile */
+    max-width:80%;
+  }
+
+  /* menu : bouton visible, menu principal masqué par défaut (ouvrir via hamburger) */
+  .menu-toggle{ display:block; }
+  .main-nav{ display:none; }
+  .main-nav.open{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:10px;
+    background:#fff;
+    border-radius:8px;
+  }
+  .main-nav a{ padding:10px 12px; font-size:1rem; }
+
+  /* hero plus aéré */
+  .hero{ padding:12px 0; }
+  .hero-overlay{ padding:14px 8px; }
+  .hero-title{ font-size:1.2rem; line-height:1.3; margin-bottom:8px; max-width:420px; }
+  .hero-lead{ font-size:0.98rem; line-height:1.5; margin:0 auto 12px; max-width:420px; text-align:center; }
+
+  /* colonnes empilées et blocs plus légers */
+  .hero-columns{ flex-direction:column; gap:10px; padding:0 6px; }
+  .hero-block{ padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; box-shadow:none; }
+
+  /* bandeau devis discret */
+  .devis-banner{ margin-top:12px; margin-bottom:10px; }
+  .devis-banner__inner{ padding:10px; font-size:0.96rem; border-radius:8px; }
+
+  /* services : pleine largeur, images lisibles */
+  .services-grid{ gap:12px; padding:0 6px; }
+  .service-card{ width:100%; max-width:100%; border-radius:8px; overflow:hidden; }
+  .service-img, .service-media{ height:120px; object-fit:cover; }
+  .service-card h3{ font-size:1rem; padding:10px 12px; }
+  .service-card p{ font-size:0.98rem; padding:0 12px 14px; line-height:1.45; }
+
+  /* galerie : image adaptée et contrôles plus petits */
+  .gallery-image{ max-height:50vh; }
+  .gallery-prev, .gallery-next, .gallery-close{
+    padding:10px 12px;
+    font-size:18px;
+  }
+}
+
+/* responsive: mobile / tablette */
+@media (max-width:920px){
+  .container{padding:12px}
+  .brand{font-size:1.6rem}
+  .hero{height:260px}
+}
+
+/* mobile: hamburger, menu masqué par défaut */
+@media (max-width:720px){
+  .index-header .header-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding:12px;
+    min-height:unset;
+  }
+  .brand{ order:2; margin:8px auto; justify-self:center; position:static; transform:none; }
+  .menu-toggle{ order:1; display:block; margin-left:8px; }
+  .main-nav{
+    order:3;
+    width:100%;
+    display:none; /* ouvert par .open via JS */
+    position:static;
+    padding:10px;
+    flex-direction:column;
+    gap:8px;
+    background:#fff;
+    border-radius:8px;
+  }
+  .main-nav.open{ display:flex; }
+  .site-logo{ height:120px; }
+}
+
+/* header : centre le logo et l'agrandit */
+.header-inner{ position:relative; }
+
+/* responsive : logo plus petit et layout statique sur mobile */
+@media (max-width:720px){
+  .site-logo{
+    height:160px; /* <-- taille pour mobile/tablette */
+  }
+  .brand{ position:static; transform:none; margin:0 auto; }
+  .brand-text{ display:inline-block; font-size:1rem; margin-left:8px; }
+}
+
+@media (max-width:920px){
+  .hero-title{ font-size:1.7rem; }
+  .site-logo{ height:160px; } /* si besoin garder proportion logo */
+  .hero-lead{ font-size:0.98rem; }
+}
+
+@media (max-width:720px){
+  .hero-columns{ flex-direction:column; gap:12px; align-items:stretch; }
+  .hero-block{ max-width:100%; padding:12px; }
+  .hero-title{ font-size:1.5rem; }
+  .hero-lead{ font-size:0.95rem; }
+  .site-logo{ height:120px; }
+}
+
+/* rendre la carte entière cliquable et accessible */
+.card-link{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+  padding:0; /* l'espacement est géré par .card */
+}
+.card-link:hover{ opacity:0.95; }
+.card-link h3{ margin:0 0 8px; }
+.card-link p{ margin:0; color:var(--accent); text-decoration:underline; }
+
+/* Modal galerie */
+.gallery-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(12,12,12,0.85);
+  z-index:1400;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.gallery-modal[aria-hidden="false"]{ display:flex; }
+.gallery-content{
+  position:relative;
+  max-width:920px;
+  width:100%;
+  text-align:center;
+}
+.gallery-image{
+  max-width:100%;
+  max-height:80vh;
+  border-radius:8px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+}
+.gallery-prev, .gallery-next, .gallery-close{
+  position:fixed;
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  border:0;
+  padding:12px 14px;
+  border-radius:8px;
+  font-size:22px;
+  cursor:pointer;
+  backdrop-filter:blur(4px);
+}
+.gallery-close{ top:18px; right:18px; position:fixed; z-index:1500; }
+.gallery-prev{ left:18px; top:50%; transform:translateY(-50%); }
+.gallery-next{ right:18px; top:50%; transform:translateY(-50%); }
+.gallery-counter{
+  margin-top:8px;
+  color:#fff;
+  font-size:0.95rem;
+}
+
+/* small screens */
+@media (max-width:720px){
+  .service-img{ height:120px; }
+  .gallery-prev, .gallery-next{ padding:10px 12px; font-size:20px; }
+  .gallery-image{ max-height:70vh; }
+}
+
+/* bannière d'en-tête : image de fond semi-transparente (35%) */
+.site-header.index-header{
+  position:relative;
+  overflow:hidden;
+}
+
+.site-header.index-header::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/banniere.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.30; /* opacité 30% */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* contenu du header au-dessus de la bannière */
+.index-header .header-inner{
+  position: relative;
+  z-index: 5;
+}
+
+/* ajustement pour petits écrans */
+@media (max-width:720px){
+  .site-header.index-header::before{
+    background-position: center top;
+  }
+}
+
+/* image d'arrière‑plan pour la carte Instagram uniquement au survol */
+.card--instagram{
+  position:relative;
+  overflow:hidden;
+}
+
+.card--instagram::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/insta.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0;                         /* invisible par défaut */
+  transition: opacity .22s ease, transform .35s ease;
+  transform: scale(1.05);             /* léger zoom pour effet visuel */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* afficher l'image à 35% d'opacité au survol (et au focus pour accessibilité) */
+.card--instagram:hover::before,
+.card--instagram:focus-within::before{
+  opacity: 0.35;
+  transform: scale(1);
+}
+
+/* contenu de la carte au-dessus de l'image */
+.card--instagram > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* image d'arrière-plan au survol pour les différentes cartes contact */
+.card--mail,
+.card--instagram,
+.card--facebook,
+.card--phone{
+  position:relative;
+  overflow:hidden;
+}
+
+/* pseudo-élément commun (invisible par défaut) */
+.card--mail::before,
+.card--instagram::before,
+.card--facebook::before,
+.card--phone::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity .22s ease, transform .28s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* images spécifiques */
+.card--instagram::before{ background-image: url('../images/insta.jpg'); }
+.card--facebook::before{ background-image: url('../images/fb.jpg'); }
+.card--mail::before{ background-image: url('../images/gmail.png'); }
+.card--phone::before{ background-image: url('../images/tel.jpg'); }
+
+/* afficher l'image à 35% d'opacité au survol et au focus */
+.card--mail:hover::before,
+.card--mail:focus-within::before,
+.card--instagram:hover::before,
+.card--instagram:focus-within::before,
+.card--facebook:hover::before,
+.card--facebook:focus-within::before,
+.card--phone:hover::before,
+.card--phone:focus-within::before{
+  opacity: 0.45;
+  transform: scale(1);
+}
+
+/* contenu au-dessus de l'image */
+.card .card-link,
+.card > *{ position:relative; z-index:1; }
+
+/* option : léger effet visuel sur hover du texte */
+.card:hover .card-link h3{
+  transform: translateY(-4px);
+  transition: transform .18s ease;
+}

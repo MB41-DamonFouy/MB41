@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MB41 — Multi Brico 41</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <header class="site-header index-header">
+    <div class="container header-inner">
+      <button class="menu-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="hamburger"></span>
+      </button>
+
+      <a href="index.html" class="brand" aria-label="MB41 — Multi Brico 41">
+        <img src="images/logo-header.png" alt="MB41 — Multi Brico 41" class="site-logo">
+      </a>
+
+      <nav id="mainNav" class="main-nav" role="navigation">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay">
+      <div class="container">
+        <h2 class="hero-title">🛠️ MB41 – Artisan multiservices près de chez vous</h2>
+
+        <p class="hero-lead">
+          Fort d’une solide expérience, MB41 réalise vos travaux de rénovation, aménagement intérieur et petits dépannages (placo, isolation, carrelage, parquet, électricité, plomberie).
+        </p>
+
+        <div class="hero-columns">
+          <div class="hero-block">
+            <h3>🔹 Nos domaines</h3>
+            <ul>
+              <li><strong>Placo & Isolation</strong> : cloisons, doublages, faux-plafonds.</li>
+              <li><strong>Parquet & Sols</strong> : pose parquet, sols PVC.</li>
+              <li><strong>Carrelage & Faïence</strong> : sols et murs.</li>
+            </ul>
+          </div>
+
+          <div class="hero-block">
+            <h3>🔹 Services techniques</h3>
+            <ul>
+              <li><strong>Électricité</strong> : petits dépannages, prises, interrupteurs.</li>
+              <li><strong>Plomberie</strong> : réparations, raccordements.</li>
+              <li><strong>Devis</strong> : gratuit et sans engagement.</li>
+            </ul>
+          </div>
+        </div>
+
+        
+    </div>
+  </section>
+
+  <div class="devis-banner">
+    <div class="devis-banner__inner">
+      <strong>Devis gratuits</strong> — Demandez votre devis personnalisé.
+      <a href="contact.html" class="devis-link">Contact</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <h2 class="section-title">Nos services</h2>
+    <section id="services" class="services-grid">
+      <article class="service-card" data-gallery="placo">
+        <img src="images/placo.jpg" alt="Placo / Isolation — MB41" class="service-img">
+        <h3>Placo / Isolation</h3>
+        <p>Pose de cloisons, doublage et isolation.</p>
+      </article>
+
+      <article class="service-card" data-gallery="carrelage">
+        <img src="images/carrelage.jpg" alt="Carrelage / Faïence — MB41" class="service-img">
+        <h3>Carrelage / Faïence</h3>
+        <p>Pose sols et murs, finitions soignées.</p>
+      </article>
+
+      <article class="service-card" data-gallery="parquet">
+        <img src="images/parquet.jpg" alt="Parquet / Sols — MB41" class="service-img">
+        <h3>Parquet / Sols</h3>
+        <p>Parquet flottant, stratifié ou massif.</p>
+      </article>
+
+      <article class="service-card" data-gallery="electricite">
+        <img src="images/électricité.jpg" alt="Électricité — MB41" class="service-img">
+        <h3>Électricité</h3>
+        <p>Dépannages et petites installations.</p>
+      </article>
+
+      <article class="service-card" data-gallery="plomberie">
+        <img src="images/plomberie.jpg" alt="Plomberie — MB41" class="service-img">
+        <h3>Plomberie</h3>
+        <p>Réparations et raccordements.</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Gallery modal (ajouter avant le footer) -->
+  <div id="galleryModal" class="gallery-modal" aria-hidden="true" role="dialog" aria-label="Galerie images">
+    <button class="gallery-close" aria-label="Fermer la galerie">✕</button>
+    <button class="gallery-prev" aria-label="Image précédente">‹</button>
+    <div class="gallery-content">
+      <img src="" alt="" class="gallery-image">
+      <div class="gallery-counter"><span class="gallery-index">1</span>/<span class="gallery-total">1</span></div>
+    </div>
+    <button class="gallery-next" aria-label="Image suivante">›</button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>MB41 — FOUY Damon · <a href="contact.html">Contact</a></p>
+    </div>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
