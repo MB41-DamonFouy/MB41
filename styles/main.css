@@ -261,58 +261,109 @@ body{
   /* taille de base raisonnable */
   html, body { font-size:15px; -webkit-text-size-adjust:100%; }
 
-  /* header compact et logo centré sans écraser la nav */
+  /* conteneur plus aéré */
+  .container{ padding-left:12px; padding-right:12px; }
+
+  /* header compact, logo centré sans chevauchement */
   .index-header .header-inner{
-    padding:8px 12px;
-    gap:8px;
-    min-height:92px;
+    display:grid;
+    grid-template-columns: 48px 1fr 48px; /* hamburger / logo / espace pour nav */
     align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    min-height:86px;
   }
+  .brand{ grid-column:2; justify-self:center; align-self:center; }
   .site-logo{
-    height:100px;    /* logo modéré sur mobile */
+    height:96px;          /* logo modéré pour mobile */
     max-width:80%;
+    width:auto;
   }
 
-  /* menu : bouton visible, menu principal masqué par défaut (ouvrir via hamburger) */
-  .menu-toggle{ display:block; }
-  .main-nav{ display:none; }
+  /* menu : hamburger visible, nav masquée par défaut */
+  .menu-toggle{ display:block; background:transparent; border:0; padding:8px; }
+  .main-nav{ display:none; position:relative; width:100%; }
   .main-nav.open{
     display:flex;
     flex-direction:column;
     gap:8px;
     padding:10px;
     background:#fff;
-    border-radius:8px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    position:absolute;
+    top:100%;
+    right:12px;
+    left:12px;
+    z-index:60;
   }
-  .main-nav a{ padding:10px 12px; font-size:1rem; }
+  .main-nav a{ padding:10px 12px; font-size:1rem; border-radius:8px; }
 
-  /* hero plus aéré */
-  .hero{ padding:12px 0; }
-  .hero-overlay{ padding:14px 8px; }
-  .hero-title{ font-size:1.2rem; line-height:1.3; margin-bottom:8px; max-width:420px; }
-  .hero-lead{ font-size:0.98rem; line-height:1.5; margin:0 auto 12px; max-width:420px; text-align:center; }
+  /* header banner opacity & position tweak */
+  .site-header.index-header::before{ opacity:0.28; background-position:center top; }
 
-  /* colonnes empilées et blocs plus légers */
-  .hero-columns{ flex-direction:column; gap:10px; padding:0 6px; }
+  /* hero : compact et lisible */
+  .hero{ padding:12px 0; height:auto; }
+  .hero-overlay{ padding:14px 0; }
+  .hero-title{ font-size:1.15rem; line-height:1.3; margin-bottom:8px; }
+  .hero-lead{ font-size:0.95rem; line-height:1.5; margin:0 auto 12px; max-width:420px; text-align:center; }
+
+  /* colonnes empilées, blocs plus légers */
+  .hero-columns{ display:flex; flex-direction:column; gap:10px; padding:0 6px; }
   .hero-block{ padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; box-shadow:none; }
 
-  /* bandeau devis discret */
-  .devis-banner{ margin-top:12px; margin-bottom:10px; }
-  .devis-banner__inner{ padding:10px; font-size:0.96rem; border-radius:8px; }
+  /* bandeau devis plus discret */
+  .devis-banner{ margin-top:12px; margin-bottom:10px; padding:0 8px; }
+  .devis-banner__inner{ padding:10px; font-size:0.96rem; border-radius:10px; }
 
-  /* services : pleine largeur, images lisibles */
-  .services-grid{ gap:12px; padding:0 6px; }
-  .service-card{ width:100%; max-width:100%; border-radius:8px; overflow:hidden; }
-  .service-img, .service-media{ height:120px; object-fit:cover; }
-  .service-card h3{ font-size:1rem; padding:10px 12px; }
-  .service-card p{ font-size:0.98rem; padding:0 12px 14px; line-height:1.45; }
-
-  /* galerie : image adaptée et contrôles plus petits */
-  .gallery-image{ max-height:50vh; }
-  .gallery-prev, .gallery-next, .gallery-close{
-    padding:10px 12px;
-    font-size:18px;
+  /* services : grid responsive, cartes pleine largeur */
+  .services-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:12px;
+    padding:0 6px;
   }
+  .service-card{
+    max-width:100%;
+    border-radius:10px;
+    overflow:hidden;
+    transition:none; /* eviter les sauts sur mobile */
+  }
+  .service-img, .service-media{ height:120px; object-fit:cover; display:block; }
+  .service-card h3{ font-size:1rem; padding:10px 12px; }
+  .service-card p{ font-size:0.95rem; padding:0 12px 14px; line-height:1.45; }
+
+  /* contact cards stacked */
+  .contact-page .contact-cards{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:10px;
+    padding:0 6px;
+  }
+  .card{ width:100%; padding:12px; border-radius:10px; }
+
+  /* cartes contact : effet background au hover uniquement, pas d'overlay permanent */
+  .card--mail::before,
+  .card--instagram::before,
+  .card--facebook::before,
+  .card--phone::before{
+    transition: opacity .18s ease, transform .22s ease;
+    transform: scale(1.02);
+  }
+  .card--mail:hover::before,
+  .card--instagram:hover::before,
+  .card--facebook:hover::before,
+  .card--phone:hover::before{ opacity:0.32; transform:scale(1); }
+
+  /* gallery modal : contrôles plus petits, image adaptée */
+  .gallery-image{ max-height:60vh; width:100%; object-fit:contain; }
+  .gallery-prev, .gallery-next, .gallery-close{ padding:10px; font-size:18px; border-radius:8px; }
+
+  /* footer compact */
+  .site-footer{ padding:12px 10px; font-size:0.95rem; text-align:center; }
+
+  /* réduire ombres et animations pour performance */
+  .service-card, .hero-block { box-shadow:0 6px 16px rgba(0,0,0,0.05); }
 }
 
 /* responsive: mobile / tablette */
@@ -555,4 +606,114 @@ body{
 .card:hover .card-link h3{
   transform: translateY(-4px);
   transition: transform .18s ease;
+}
+
+/* ======= Overrides mobiles : rendu épuré et lisible ======= */
+@media (max-width:720px){
+  /* taille de base raisonnable */
+  html, body { font-size:15px; -webkit-text-size-adjust:100%; }
+
+  /* conteneur plus aéré */
+  .container{ padding-left:12px; padding-right:12px; }
+
+  /* header compact, logo centré sans chevauchement */
+  .index-header .header-inner{
+    display:grid;
+    grid-template-columns: 48px 1fr 48px; /* hamburger / logo / espace pour nav */
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    min-height:86px;
+  }
+  .brand{ grid-column:2; justify-self:center; align-self:center; }
+  .site-logo{
+    height:96px;          /* logo modéré pour mobile */
+    max-width:80%;
+    width:auto;
+  }
+
+  /* menu : hamburger visible, nav masquée par défaut */
+  .menu-toggle{ display:block; background:transparent; border:0; padding:8px; }
+  .main-nav{ display:none; position:relative; width:100%; }
+  .main-nav.open{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:10px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    position:absolute;
+    top:100%;
+    right:12px;
+    left:12px;
+    z-index:60;
+  }
+  .main-nav a{ padding:10px 12px; font-size:1rem; border-radius:8px; }
+
+  /* header banner opacity & position tweak */
+  .site-header.index-header::before{ opacity:0.28; background-position:center top; }
+
+  /* hero : compact et lisible */
+  .hero{ padding:12px 0; height:auto; }
+  .hero-overlay{ padding:14px 0; }
+  .hero-title{ font-size:1.15rem; line-height:1.3; margin-bottom:8px; }
+  .hero-lead{ font-size:0.95rem; line-height:1.5; margin:0 auto 12px; max-width:420px; text-align:center; }
+
+  /* colonnes empilées, blocs plus légers */
+  .hero-columns{ display:flex; flex-direction:column; gap:10px; padding:0 6px; }
+  .hero-block{ padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; box-shadow:none; }
+
+  /* bandeau devis plus discret */
+  .devis-banner{ margin-top:12px; margin-bottom:10px; padding:0 8px; }
+  .devis-banner__inner{ padding:10px; font-size:0.96rem; border-radius:10px; }
+
+  /* services : grid responsive, cartes pleine largeur */
+  .services-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:12px;
+    padding:0 6px;
+  }
+  .service-card{
+    max-width:100%;
+    border-radius:10px;
+    overflow:hidden;
+    transition:none; /* eviter les sauts sur mobile */
+  }
+  .service-img, .service-media{ height:120px; object-fit:cover; display:block; }
+  .service-card h3{ font-size:1rem; padding:10px 12px; }
+  .service-card p{ font-size:0.95rem; padding:0 12px 14px; line-height:1.45; }
+
+  /* contact cards stacked */
+  .contact-page .contact-cards{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:10px;
+    padding:0 6px;
+  }
+  .card{ width:100%; padding:12px; border-radius:10px; }
+
+  /* cartes contact : effet background au hover uniquement, pas d'overlay permanent */
+  .card--mail::before,
+  .card--instagram::before,
+  .card--facebook::before,
+  .card--phone::before{
+    transition: opacity .18s ease, transform .22s ease;
+    transform: scale(1.02);
+  }
+  .card--mail:hover::before,
+  .card--instagram:hover::before,
+  .card--facebook:hover::before,
+  .card--phone:hover::before{ opacity:0.32; transform:scale(1); }
+
+  /* gallery modal : contrôles plus petits, image adaptée */
+  .gallery-image{ max-height:60vh; width:100%; object-fit:contain; }
+  .gallery-prev, .gallery-next, .gallery-close{ padding:10px; font-size:18px; border-radius:8px; }
+
+  /* footer compact */
+  .site-footer{ padding:12px 10px; font-size:0.95rem; text-align:center; }
+
+  /* réduire ombres et animations pour performance */
+  .service-card, .hero-block { box-shadow:0 6px 16px rgba(0,0,0,0.05); }
 }
